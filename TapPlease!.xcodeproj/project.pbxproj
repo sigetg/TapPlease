@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DA3857E429F8219A00C24612 /* Messenger.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3857E329F8219A00C24612 /* Messenger.swift */; };
+		DA3857E629F8220200C24612 /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3857E529F8220200C24612 /* MenuItem.swift */; };
 		DA53222529F5E1D200A51CD6 /* TitleRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA53222429F5E1D200A51CD6 /* TitleRow.swift */; };
 		DA53222729F5E1E300A51CD6 /* MessageBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA53222629F5E1E300A51CD6 /* MessageBubble.swift */; };
 		DA53222929F5E1F100A51CD6 /* MessageField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA53222829F5E1F100A51CD6 /* MessageField.swift */; };
@@ -14,7 +16,6 @@
 		DA53222D29F5E26100A51CD6 /* MessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA53222C29F5E26100A51CD6 /* MessageViewModel.swift */; };
 		DA53222F29F5E32D00A51CD6 /* MessengerDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA53222E29F5E32D00A51CD6 /* MessengerDetailView.swift */; };
 		DA53223129F5E94300A51CD6 /* MessengerListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA53223029F5E94300A51CD6 /* MessengerListView.swift */; };
-		DA53223329F5EA7F00A51CD6 /* Messenger.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA53223229F5EA7F00A51CD6 /* Messenger.swift */; };
 		DA53223529F5EEF400A51CD6 /* MessengerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA53223429F5EEF400A51CD6 /* MessengerViewModel.swift */; };
 		DA53223729F6408F00A51CD6 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA53223629F6408F00A51CD6 /* WebView.swift */; };
 		DA5FEA8C29F0C7B400E13693 /* TapPlease_App.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5FEA8B29F0C7B400E13693 /* TapPlease_App.swift */; };
@@ -26,7 +27,6 @@
 		DA5FEA9F29F0C9AB00E13693 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DA5FEA9E29F0C9AB00E13693 /* FirebaseFirestoreSwift */; };
 		DA5FEAA229F0C9FC00E13693 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = DA5FEAA129F0C9FC00E13693 /* GoogleSignIn */; };
 		DA5FEAA429F0C9FC00E13693 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DA5FEAA329F0C9FC00E13693 /* GoogleSignInSwift */; };
-		DA5FEAA929F0CA6A00E13693 /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5FEAA829F0CA6A00E13693 /* MenuItem.swift */; };
 		DA5FEAAB29F0CA7500E13693 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5FEAAA29F0CA7500E13693 /* Photo.swift */; };
 		DA5FEAAD29F0CA7F00E13693 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5FEAAC29F0CA7F00E13693 /* Review.swift */; };
 		DA5FEAAF29F0CA9200E13693 /* MenuItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5FEAAE29F0CA9200E13693 /* MenuItemViewModel.swift */; };
@@ -47,6 +47,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DA3857E329F8219A00C24612 /* Messenger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messenger.swift; sourceTree = "<group>"; };
+		DA3857E529F8220200C24612 /* MenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
 		DA53222429F5E1D200A51CD6 /* TitleRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleRow.swift; sourceTree = "<group>"; };
 		DA53222629F5E1E300A51CD6 /* MessageBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageBubble.swift; sourceTree = "<group>"; };
 		DA53222829F5E1F100A51CD6 /* MessageField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageField.swift; sourceTree = "<group>"; };
@@ -54,7 +56,6 @@
 		DA53222C29F5E26100A51CD6 /* MessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewModel.swift; sourceTree = "<group>"; };
 		DA53222E29F5E32D00A51CD6 /* MessengerDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerDetailView.swift; sourceTree = "<group>"; };
 		DA53223029F5E94300A51CD6 /* MessengerListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerListView.swift; sourceTree = "<group>"; };
-		DA53223229F5EA7F00A51CD6 /* Messenger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messenger.swift; sourceTree = "<group>"; };
 		DA53223429F5EEF400A51CD6 /* MessengerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerViewModel.swift; sourceTree = "<group>"; };
 		DA53223629F6408F00A51CD6 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		DA5FEA8829F0C7B400E13693 /* TapPlease!.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TapPlease!.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -62,7 +63,6 @@
 		DA5FEA8D29F0C7B400E13693 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		DA5FEA8F29F0C7B500E13693 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DA5FEA9229F0C7B500E13693 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		DA5FEAA829F0CA6A00E13693 /* MenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
 		DA5FEAAA29F0CA7500E13693 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		DA5FEAAC29F0CA7F00E13693 /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 		DA5FEAAE29F0CA9200E13693 /* MenuItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemViewModel.swift; sourceTree = "<group>"; };
@@ -154,12 +154,12 @@
 		DA5FEAA529F0CA3100E13693 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				DA5FEAA829F0CA6A00E13693 /* MenuItem.swift */,
+				DA3857E529F8220200C24612 /* MenuItem.swift */,
 				DA5FEAAA29F0CA7500E13693 /* Photo.swift */,
 				DA5FEAAC29F0CA7F00E13693 /* Review.swift */,
 				DA5FEAC429F0DA8000E13693 /* MealRequest.swift */,
 				DA53222A29F5E23000A51CD6 /* Message.swift */,
-				DA53223229F5EA7F00A51CD6 /* Messenger.swift */,
+				DA3857E329F8219A00C24612 /* Messenger.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -300,19 +300,19 @@
 				DA5FEAB529F0CAD500E13693 /* MenuItemDetailView.swift in Sources */,
 				DA5FEAC929F0DCD600E13693 /* MealRequestViewModel.swift in Sources */,
 				DA5FEAB129F0CAA100E13693 /* ReviewViewModel.swift in Sources */,
-				DA5FEAA929F0CA6A00E13693 /* MenuItem.swift in Sources */,
 				DA53222729F5E1E300A51CD6 /* MessageBubble.swift in Sources */,
 				DA5FEAB329F0CAB600E13693 /* MenuItemListView.swift in Sources */,
 				DA80354529F73448007C3A09 /* Settings.swift in Sources */,
 				DA53223529F5EEF400A51CD6 /* MessengerViewModel.swift in Sources */,
 				DA5FEA8E29F0C7B400E13693 /* LoginView.swift in Sources */,
 				DA53222F29F5E32D00A51CD6 /* MessengerDetailView.swift in Sources */,
+				DA3857E629F8220200C24612 /* MenuItem.swift in Sources */,
 				DA5FEACB29F0DEED00E13693 /* MealRequestDetailView.swift in Sources */,
-				DA53223329F5EA7F00A51CD6 /* Messenger.swift in Sources */,
 				DA5FEAAF29F0CA9200E13693 /* MenuItemViewModel.swift in Sources */,
 				DA53223729F6408F00A51CD6 /* WebView.swift in Sources */,
 				DA5FEA8C29F0C7B400E13693 /* TapPlease_App.swift in Sources */,
 				DA53222529F5E1D200A51CD6 /* TitleRow.swift in Sources */,
+				DA3857E429F8219A00C24612 /* Messenger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
