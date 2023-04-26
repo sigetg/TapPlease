@@ -17,7 +17,7 @@ struct MenuItemListView: View {
     @State private var showWebView = false
     @State private var sheetIsPresented = false
     @State private var uiImage = UIImage()
-    @State private var photo = Photo()
+//    @State private var photo = Photo()
     
     var searchResult: [MenuItem] { //TODO: Sort this by avg rating and add photo functionality
         if searchText.isEmpty {
@@ -54,32 +54,34 @@ struct MenuItemListView: View {
                             }
                         }
                     }
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button {
-                            sheetIsPresented.toggle()
-                        } label: {
-                            Image(systemName: "plus")
+                }
+                
+                HStack {
+                    Button {
+                        showWebView.toggle()
+                    } label: {
+                        Text("Tap For Today's Menu")
+                    }
+                    .sheet(isPresented: $showWebView) { //TODO: Add a toolbar to this somehow
+                        NavigationView {
+                            WebView(url: URL(string: "https://www.bc.edu/bc-web/offices/auxiliary-services/sites/dining/locations/dining-menus.html")!)
                         }
-                    }
-                }
-                Button {
-                    showWebView.toggle()
-                } label: {
-                    Text("Tap For Today's Menu")
-                }
-                .sheet(isPresented: $showWebView) { //TODO: Add a toolbar to this somehow
-                    NavigationView {
-                        WebView(url: URL(string: "https://www.bc.edu/bc-web/offices/auxiliary-services/sites/dining/locations/dining-menus.html")!)
-                    }
-                    .toolbar {
-                        ToolbarItem(placement: .navigationBarTrailing) {
-                            Button("Done") {
-                                dismiss()
+                        .toolbar {
+                            ToolbarItem(placement: .navigationBarTrailing) {
+                                Button("Done") {
+                                    dismiss()
+                                }
                             }
                         }
                     }
+                    .buttonStyle(.borderedProminent)
+                    
+                    Button {
+                        sheetIsPresented.toggle()
+                    } label: {
+                        Image(systemName: "plus.circle")
+                    }
                 }
-                .buttonStyle(.borderedProminent)
                 .padding()
             }
         }

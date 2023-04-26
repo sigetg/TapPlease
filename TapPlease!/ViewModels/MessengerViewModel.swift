@@ -38,4 +38,23 @@ class MessengerViewModel: ObservableObject {
             }
         }
     }
+    
+    func getMealRequest(messenger: Messenger) async -> MealRequest? {
+        let db = Firestore.firestore() //ignore any error that shows up here. Wait for indexing. Clean build if it persists with Shift+Command+K.
+        do {
+            let ref = try await db.collection("mealRequests").document(messenger.mealRequestID).getDocument()
+            print("😎 Meal Request Found!")
+            do {
+                let data = try ref.data(as: MealRequest.self)
+                print("data successfully converted")
+                return data
+            } catch {
+                print("😡 ERROR: Could not convert data to MealRequest: \(error.localizedDescription)")
+            }
+        } catch {
+            print("😡 ERROR: Could not update data in 'messengers': \(error.localizedDescription)")
+            return nil
+        }
+        return nil
+    }
 }

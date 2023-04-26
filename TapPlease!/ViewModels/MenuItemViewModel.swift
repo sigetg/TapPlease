@@ -50,7 +50,7 @@ class MenuItemViewModel: ObservableObject {
                 print("😡 ERROR: Could not update data in 'menuItems' \(error.localizedDescription)")
                 return nil
             }
-        } else { // no id? Then this must be a new student to add
+        } else { // no id? Then this must be a new menuItem to add
             do {
                 let docRef = try await db.collection("menuItems").addDocument(data: menuItem.dictionary)
                 print("🐣 Data added successfully!")

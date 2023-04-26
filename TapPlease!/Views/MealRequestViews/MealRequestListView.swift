@@ -17,45 +17,56 @@ struct MealRequestListView: View {
     @State private var searchText = ""
     @State private var sheetIsPresented = false
     @State private var uiImage = UIImage()
-    @State private var photo = Photo()
+    //    @State private var photo = Photo()
+    @State var messenger = Messenger()
     
-    var searchResult: [MealRequest] {
-        if searchText.isEmpty {
-            return mealRequests
-        } else {
-            return mealRequests.filter {$0.pickupLocation.capitalized.contains(searchText)}
-        }
-    }
     var body: some View {
         NavigationStack {
-            List(mealRequests) { mealRequest in
-                NavigationLink {
-                    MealRequestDetailView(mealRequest: mealRequest)
-                } label: {
-                    HStack {
-                        Text(mealRequest.pickupLocation)
-                        Spacer()
-                        if mealRequest.postedBy != Auth.auth().currentUser?.email {
-                            Button("Accept") {
-                                Task {
-                                    await messengerVM.saveMessenger(messenger: Messenger(reciever: mealRequest.postedBy))
+            VStack {
+                List(mealRequests.filter{ !$0.accepted }) { mealRequest in
+                    NavigationLink {
+                        MealRequestDetailView(mealRequest: mealRequest)
+                    } label: {
+                        HStack {
+                            Text(mealRequest.pickupLocation)
+                            Spacer()
+                            if mealRequest.postedBy != Auth.auth().currentUser?.email {
+                                Button("accept") {
+                                    var newMealRequest = mealRequest
+                                    newMealRequest.accepted = true
+                                    Task {
+                                        var success = await mealRequestVM.deleteMealRequest(mealRequest: mealRequest)
+                                        success = await messengerVM.saveMessenger(messenger: Messenger(reciever: newMealRequest.postedBy, mealRequestID: newMealRequest.id ?? ""))
+                                        success = await mealRequestVM.saveMealRequest(mealRequest: newMealRequest)
+                                        if success {
+                                            print("Meal Request Accepted")
+                                        }
+                                    }
                                 }
+                                .buttonStyle(.borderedProminent)
                             }
-                            .buttonStyle(.borderedProminent)
                         }
+                        .padding()
                     }
-                    .padding()
                 }
+                Button {
+                    sheetIsPresented.toggle()
+                } label: {
+                    Image(systemName: "plus.circle.fill")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 50, height: 50)
+                }
+                .padding(.bottom)
             }
             .listStyle(.plain)
             .font(.title2)
             .navigationTitle("Meal Requests")
             .navigationBarTitleDisplayMode(.inline)
-            .searchable(text: $searchText)
             .onAppear {
                 let now = Date()
                 for mealRequest in mealRequests {
-                    if mealRequest.postedOn + 3600 < now {
+                    if mealRequest.postedOn + 3600 < now && mealRequest.accepted == false {
                         Task {
                             await mealRequestVM.deleteMealRequest(mealRequest: mealRequest)
                         }
@@ -84,14 +95,8 @@ struct MealRequestListView: View {
                         }
                     }
                 }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        sheetIsPresented.toggle()
-                    } label: {
-                        Image(systemName: "plus")
-                    }
-                }
             }
+            
         }
         .sheet(isPresented: $sheetIsPresented) {
             NavigationStack {

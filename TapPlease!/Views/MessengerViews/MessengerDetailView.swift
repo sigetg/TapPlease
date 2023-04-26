@@ -8,12 +8,10 @@
 import SwiftUI
 import Firebase
 import FirebaseFirestoreSwift
-import AVFAudio
 
 struct MessengerDetailView: View {
     @EnvironmentObject var messageVM: MessageViewModel
     @State var messenger: Messenger
-    @State private var audioPlayer: AVAudioPlayer!
     @State private var isFirstChange = true
     
     var body: some View {
@@ -32,13 +30,6 @@ struct MessengerDetailView: View {
                     .cornerRadius(30, corners: [.topLeft, .topRight]) // Custom cornerRadius modifier added in Extensions file
                     .onChange(of: messageVM.lastMessageId) { id in
                         print("👗 this is doing something")
-                        if isFirstChange == true {
-                            isFirstChange = false
-                        } else if messageVM.messages.last?.sender == Auth.auth().currentUser?.email {
-                            playSound(soundName: "sendSound")
-                        } else {
-                            playSound(soundName: "recieveSound")
-                        }
                         // When the lastMessageId changes, scroll to the bottom of the conversation
                         withAnimation {
                             proxy.scrollTo(messageVM.messages[messageVM.messages.endIndex-1].id)
@@ -53,18 +44,6 @@ struct MessengerDetailView: View {
             
             MessageField(messages: messageVM.messages, message: Message(), messenger: messenger)
                 .environmentObject(messageVM)
-        }
-    }
-    func playSound(soundName: String) {
-        guard let soundFile = NSDataAsset(name: soundName) else {
-            print("😡 Could not read file named \(soundName)")
-            return
-        }
-        do {
-            audioPlayer = try AVAudioPlayer(data: soundFile.data)
-            audioPlayer.play()
-        } catch {
-            print("😡 ERROR: \(error.localizedDescription) creating audioPlayer.")
         }
     }
 }

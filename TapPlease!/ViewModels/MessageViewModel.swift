@@ -8,6 +8,8 @@
 import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
+import AVFAudio
+import Firebase
 
 @MainActor
 class MessageViewModel: ObservableObject {
@@ -15,7 +17,6 @@ class MessageViewModel: ObservableObject {
     @Published var message = Message()
     @Published private(set) var lastMessageId: String = ""
     
-    // Create an instance of our Firestore database
     let db = Firestore.firestore()
     
     // Read message from Firestore in real-time with the addSnapShotListener
@@ -72,6 +73,11 @@ class MessageViewModel: ObservableObject {
             let documentRef = try await db.collection(collectionString).addDocument(data: message.dictionary)
             self.message = message
             self.message.id = documentRef.documentID
+            if messenger.sender == Auth.auth().currentUser?.email {
+                playSound(soundName: "sendSound")
+            } else {
+                playSound(soundName: "recieveSound")
+            }
             print("🐣 Data created successfully!")
             return
         } catch {
@@ -94,5 +100,19 @@ class MessageViewModel: ObservableObject {
 
         // add our notification request
         UNUserNotificationCenter.current().add(request)
+    }
+    
+    func playSound(soundName: String) {
+        var audioPlayer: AVAudioPlayer!
+        guard let soundFile = NSDataAsset(name: soundName) else {
+            print("😡 Could not read file named \(soundName)")
+            return
+        }
+        do {
+            audioPlayer = try AVAudioPlayer(data: soundFile.data)
+            audioPlayer.play()
+        } catch {
+            print("😡 ERROR: \(error.localizedDescription) creating audioPlayer.")
+        }
     }
 }
