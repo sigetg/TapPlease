@@ -17,8 +17,8 @@
 		DA10F57529F98807006CEB41 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA10F57429F98807006CEB41 /* ProfileViewModel.swift */; };
 		DA10F57729F988BF006CEB41 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA10F57629F988BF006CEB41 /* RootView.swift */; };
 		DA10F57929F98AD5006CEB41 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA10F57829F98AD5006CEB41 /* StorageManager.swift */; };
-		DA10F57B29F98B77006CEB41 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA10F57A29F98B77006CEB41 /* SettingsView.swift */; };
-		DA10F57D29F98BAC006CEB41 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA10F57C29F98BAC006CEB41 /* SettingsViewModel.swift */; };
+		DA10F57B29F98B77006CEB41 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA10F57A29F98B77006CEB41 /* EditProfileView.swift */; };
+		DA10F57F29F9CE0A006CEB41 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA10F57E29F9CE0A006CEB41 /* GoogleService-Info.plist */; };
 		DA3857E429F8219A00C24612 /* Messenger.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3857E329F8219A00C24612 /* Messenger.swift */; };
 		DA3857E629F8220200C24612 /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3857E529F8220200C24612 /* MenuItem.swift */; };
 		DA53222529F5E1D200A51CD6 /* TitleRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA53222429F5E1D200A51CD6 /* TitleRow.swift */; };
@@ -49,7 +49,6 @@
 		DA5FEAB929F0CAF900E13693 /* StarsSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5FEAB829F0CAF900E13693 /* StarsSelectionView.swift */; };
 		DA5FEABB29F0CB2100E13693 /* ReviewRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5FEABA29F0CB2100E13693 /* ReviewRowView.swift */; };
 		DA5FEABE29F0CD3700E13693 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = DA5FEABD29F0CD3700E13693 /* FirebaseStorage */; };
-		DA5FEAC029F0CDE500E13693 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA5FEABF29F0CDE500E13693 /* GoogleService-Info.plist */; };
 		DA5FEAC329F0D37E00E13693 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5FEAC229F0D37E00E13693 /* HomeView.swift */; };
 		DA5FEAC529F0DA8000E13693 /* MealRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5FEAC429F0DA8000E13693 /* MealRequest.swift */; };
 		DA5FEAC729F0DC6800E13693 /* MealRequestListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5FEAC629F0DC6800E13693 /* MealRequestListView.swift */; };
@@ -67,8 +66,8 @@
 		DA10F57429F98807006CEB41 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		DA10F57629F988BF006CEB41 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		DA10F57829F98AD5006CEB41 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
-		DA10F57A29F98B77006CEB41 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		DA10F57C29F98BAC006CEB41 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		DA10F57A29F98B77006CEB41 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
+		DA10F57E29F9CE0A006CEB41 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DA3857E329F8219A00C24612 /* Messenger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messenger.swift; sourceTree = "<group>"; };
 		DA3857E529F8220200C24612 /* MenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
 		DA53222429F5E1D200A51CD6 /* TitleRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleRow.swift; sourceTree = "<group>"; };
@@ -94,7 +93,6 @@
 		DA5FEAB629F0CAE900E13693 /* ReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewView.swift; sourceTree = "<group>"; };
 		DA5FEAB829F0CAF900E13693 /* StarsSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarsSelectionView.swift; sourceTree = "<group>"; };
 		DA5FEABA29F0CB2100E13693 /* ReviewRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewRowView.swift; sourceTree = "<group>"; };
-		DA5FEABF29F0CDE500E13693 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		DA5FEAC129F0D1C800E13693 /* TapPlease--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "TapPlease--Info.plist"; sourceTree = SOURCE_ROOT; };
 		DA5FEAC229F0D37E00E13693 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		DA5FEAC429F0DA8000E13693 /* MealRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealRequest.swift; sourceTree = "<group>"; };
@@ -173,6 +171,15 @@
 			path = AuthViews;
 			sourceTree = "<group>";
 		};
+		DA10F58029F9D916006CEB41 /* ProfileViews */ = {
+			isa = PBXGroup;
+			children = (
+				DA80354429F73448007C3A09 /* ProfileView.swift */,
+				DA10F57A29F98B77006CEB41 /* EditProfileView.swift */,
+			);
+			path = ProfileViews;
+			sourceTree = "<group>";
+		};
 		DA53222329F5E19700A51CD6 /* MessengerViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -212,7 +219,7 @@
 				DA5FEAA629F0CA3D00E13693 /* ViewModels */,
 				DA5FEAA729F0CA4F00E13693 /* Views */,
 				DA5FEA8F29F0C7B500E13693 /* Assets.xcassets */,
-				DA5FEABF29F0CDE500E13693 /* GoogleService-Info.plist */,
+				DA10F57E29F9CE0A006CEB41 /* GoogleService-Info.plist */,
 				DA5FEA9129F0C7B500E13693 /* Preview Content */,
 			);
 			path = "TapPlease!";
@@ -248,7 +255,6 @@
 				DA53223429F5EEF400A51CD6 /* MessengerViewModel.swift */,
 				DA53222C29F5E26100A51CD6 /* MessageViewModel.swift */,
 				DA10F57429F98807006CEB41 /* ProfileViewModel.swift */,
-				DA10F57C29F98BAC006CEB41 /* SettingsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -257,9 +263,8 @@
 			isa = PBXGroup;
 			children = (
 				DA10F57629F988BF006CEB41 /* RootView.swift */,
-				DA10F57A29F98B77006CEB41 /* SettingsView.swift */,
 				DA5FEAC229F0D37E00E13693 /* HomeView.swift */,
-				DA80354429F73448007C3A09 /* ProfileView.swift */,
+				DA10F58029F9D916006CEB41 /* ProfileViews */,
 				DA10F56D29F974D2006CEB41 /* AuthViews */,
 				DA10F56229F8D0A5006CEB41 /* MenuItemViews */,
 				DA10F56129F8D073006CEB41 /* MealRequestViews */,
@@ -350,7 +355,7 @@
 			files = (
 				DA5FEA9329F0C7B500E13693 /* Preview Assets.xcassets in Resources */,
 				DA5FEA9029F0C7B500E13693 /* Assets.xcassets in Resources */,
-				DA5FEAC029F0CDE500E13693 /* GoogleService-Info.plist in Resources */,
+				DA10F57F29F9CE0A006CEB41 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -372,10 +377,9 @@
 				DA10F57929F98AD5006CEB41 /* StorageManager.swift in Sources */,
 				DA5FEAC329F0D37E00E13693 /* HomeView.swift in Sources */,
 				DA53222B29F5E23000A51CD6 /* Message.swift in Sources */,
-				DA10F57B29F98B77006CEB41 /* SettingsView.swift in Sources */,
+				DA10F57B29F98B77006CEB41 /* EditProfileView.swift in Sources */,
 				DA5FEAAB29F0CA7500E13693 /* Photo.swift in Sources */,
 				DA5FEABB29F0CB2100E13693 /* ReviewRowView.swift in Sources */,
-				DA10F57D29F98BAC006CEB41 /* SettingsViewModel.swift in Sources */,
 				DA5FEAB929F0CAF900E13693 /* StarsSelectionView.swift in Sources */,
 				DA10F56C29F96938006CEB41 /* AuthenticationView.swift in Sources */,
 				DA5FEAB529F0CAD500E13693 /* MenuItemDetailView.swift in Sources */,

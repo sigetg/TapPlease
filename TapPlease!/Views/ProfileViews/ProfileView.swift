@@ -10,26 +10,29 @@ import PhotosUI
 
 struct ProfileView: View {
     
-    @StateObject private var profileVM = ProfileViewModel()
+    @EnvironmentObject var profileVM: ProfileViewModel
     @Binding var showSignInView: Bool
     @State private var selectedItem: PhotosPickerItem? = nil
     @State private var url: URL? = nil
-    @State private var tempName = DBUser.init(userId: "", name: "").name
     
     var body: some View {
         List {
             if let user = profileVM.user {
-                Text("UserId: \(user.userId)")
-                TextField("enter name...", text: Binding(
-                    get: { self.tempName ?? "" },
-                    set: { self.tempName = $0.isEmpty ? nil : $0 }
-                ))
-                VStack {
+                HStack {
+                    Text("Name: ")
+                        .bold()
+                    Text("\(user.name ?? "")")
+                }
+                HStack {
+                    Text("Email: ")
+                        .bold()
+                    Text("\(user.email ?? "")")
+                }
+                VStack(alignment: .center) {
                     
                     PhotosPicker(selection: $selectedItem, matching: .images, photoLibrary: .shared()) {
                         Text("Select a photo")
                     }
-                    
                     
                     if let urlString = profileVM.user?.profileImagePathUrl, let url = URL(string: urlString) {
                         AsyncImage(url: url) { image in
@@ -50,13 +53,22 @@ struct ProfileView: View {
                         }
                     }
                 }
+                Section {
+                    Button("Log out") {
+                        Task {
+                            do {
+                                try profileVM.signOut()
+                                showSignInView = true
+                            } catch {
+                                print(error)
+                            }
+                        }
+                    }
+                }
             }
         }
         .task {
             try? await profileVM.loadCurrentUser()
-            if let user = profileVM.user {
-                tempName = profileVM.user?.name
-            }
         }
         .onChange(of: selectedItem, perform: { newValue in
             if let newValue {
@@ -67,10 +79,9 @@ struct ProfileView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 NavigationLink {
-                    SettingsView(showSignInView: $showSignInView)
+                    EditProfileView(showSignInView: $showSignInView)
                 } label: {
-                    Image(systemName: "gear")
-                        .font(.headline)
+                    Text("Edit Profile")
                 }
             }
         }

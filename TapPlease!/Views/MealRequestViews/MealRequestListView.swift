@@ -49,15 +49,6 @@ struct MealRequestListView: View {
                         .padding()
                     }
                 }
-                Button {
-                    sheetIsPresented.toggle()
-                } label: {
-                    Image(systemName: "plus.circle.fill")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 50, height: 50)
-                }
-                .padding(.bottom)
             }
             .listStyle(.plain)
             .font(.title2)
@@ -84,15 +75,11 @@ struct MealRequestListView: View {
                 }
             }
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Sign Out") {
-                        do {
-                            try Auth.auth().signOut()
-                            print("🪵➡️ Log out Successful!")
-                            dismiss()
-                        } catch {
-                            print("😡 ERROR: Could not sign out!")
-                        }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        sheetIsPresented.toggle()
+                    } label: {
+                        Image(systemName: "plus")
                     }
                 }
             }

@@ -18,6 +18,7 @@ struct HeightsGrubApp: App {
     @StateObject var mealRequestVM = MealRequestViewModel()
     @StateObject var messengerVM = MessengerViewModel()
     @StateObject var messageVM = MessageViewModel()
+    @StateObject var profileVM = ProfileViewModel()
 
     var body: some Scene {
         
@@ -27,6 +28,7 @@ struct HeightsGrubApp: App {
                 .environmentObject(mealRequestVM)
                 .environmentObject(messengerVM)
                 .environmentObject(messageVM)
+                .environmentObject(profileVM)
         }
     }
 }
@@ -38,11 +40,4 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         FirebaseApp.configure()
         return true
     }
-    
-    func application(_ app: UIApplication,
-                     open url: URL,
-                     options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
-        return GIDSignIn.sharedInstance.handle(url)
-    }
-    
 }

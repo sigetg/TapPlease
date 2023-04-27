@@ -44,14 +44,10 @@ struct MenuItemListView: View {
                 .searchable(text: $searchText)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
-                        Button("Sign Out") {
-                            do {
-                                try Auth.auth().signOut()
-                                print("🪵➡️ Log out Successful!")
-                                dismiss()
-                            } catch {
-                                print("😡 ERROR: Could not sign out!")
-                            }
+                        Button {
+                            sheetIsPresented.toggle()
+                        } label: {
+                            Image(systemName: "plus")
                         }
                     }
                 }
@@ -75,12 +71,6 @@ struct MenuItemListView: View {
                         }
                     }
                     .buttonStyle(.borderedProminent)
-                    
-                    Button {
-                        sheetIsPresented.toggle()
-                    } label: {
-                        Image(systemName: "plus.circle")
-                    }
                 }
                 .padding()
             }

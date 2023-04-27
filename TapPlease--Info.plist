@@ -7,12 +7,16 @@
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>Google Sign In</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>com.googleusercontent.apps.1085479060201-3r56pfl45ruodo0plipo8sqbqpqc96hj</string>
 			</array>
 		</dict>
 	</array>
+	<key>GIDClientID</key>
+	<string>1085479060201-3r56pfl45ruodo0plipo8sqbqpqc96hj.apps.googleusercontent.com</string>
 	<key>UILaunchScreen</key>
 	<dict>
 		<key>UIImageName</key>

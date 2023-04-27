@@ -10,6 +10,7 @@ import Firebase
 import FirebaseFirestoreSwift
 
 struct MessengerDetailView: View {
+    @EnvironmentObject var profileVM: ProfileViewModel
     @EnvironmentObject var messageVM: MessageViewModel
     @State var messenger: Messenger
     @State private var isFirstChange = true

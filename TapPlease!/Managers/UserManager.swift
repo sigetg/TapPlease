@@ -103,9 +103,7 @@ final class UserManager {
 //        decoder.keyDecodingStrategy = .convertFromSnakeCase
         return decoder
     }()
-    
-    private var userFavoriteProductsListener: ListenerRegistration? = nil
-    
+        
     func createNewUser(user: DBUser) async throws {
         try userDocument(userId: user.userId).setData(from: user, merge: false)
     }

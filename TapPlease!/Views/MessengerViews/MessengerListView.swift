@@ -39,19 +39,11 @@ struct MessengerListView: View {
             .navigationTitle("Active Request Chats")
             .navigationBarTitleDisplayMode(.inline)
             .searchable(text: $searchText)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Sign Out") {
-                        do {
-                            try Auth.auth().signOut()
-                            print("🪵➡️ Log out Successful!")
-                            dismiss()
-                        } catch {
-                            print("😡 ERROR: Could not sign out!")
-                        }
-                    }
-                }
-            }
+//            .toolbar {
+//                ToolbarItem(placement: .navigationBarLeading) {
+//                    
+//                }
+//            }
         }
     }
 }
