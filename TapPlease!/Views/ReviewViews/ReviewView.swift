@@ -9,7 +9,7 @@ import SwiftUI
 import Firebase
 
 struct ReviewView: View {
-    @StateObject var reviewVM = ReviewViewModel()
+    @EnvironmentObject var reviewVM: ReviewViewModel
     @State private var postedByThisUser = false
     @State var menuItem: MenuItem
     @State var review: Review
@@ -79,9 +79,12 @@ struct ReviewView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Save") {
                         Task {
-                            await reviewVM.saveReview(menuItem: menuItem, review: review)
+                            let success = await reviewVM.saveReview(menuItem: menuItem, review: review)
+                            await reviewVM.getReviews(id: menuItem.id ?? "")
+                            if success {
+                                dismiss()
+                            }
                         }
-                        dismiss()
                     }
                 }
                 if review.id != nil {

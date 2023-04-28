@@ -11,6 +11,7 @@ import FirebaseFirestoreSwift
 
 struct MealRequestListView: View {
     @EnvironmentObject var mealRequestVM: MealRequestViewModel
+    @EnvironmentObject var profileVM: ProfileViewModel
     @EnvironmentObject var messengerVM: MessengerViewModel
     @FirestoreQuery(collectionPath: "mealRequests") var mealRequests: [MealRequest]
     @Environment(\.dismiss) private var dismiss
@@ -30,13 +31,13 @@ struct MealRequestListView: View {
                         HStack {
                             Text(mealRequest.pickupLocation)
                             Spacer()
-                            if mealRequest.postedBy != Auth.auth().currentUser?.email {
+                            if mealRequest.postedBy != Auth.auth().currentUser?.uid {
                                 Button("accept") {
                                     var newMealRequest = mealRequest
                                     newMealRequest.accepted = true
                                     Task {
                                         var success = await mealRequestVM.deleteMealRequest(mealRequest: mealRequest)
-                                        success = await messengerVM.saveMessenger(messenger: Messenger(reciever: newMealRequest.postedBy, mealRequestID: newMealRequest.id ?? ""))
+                                        success = await messengerVM.saveMessenger(messenger: Messenger(reciever: newMealRequest.postedBy, recieverName: mealRequest.postedByName, senderName: profileVM.user?.name ?? "", mealRequestID: newMealRequest.id ?? ""))
                                         success = await mealRequestVM.saveMealRequest(mealRequest: newMealRequest)
                                         if success {
                                             print("Meal Request Accepted")
@@ -54,6 +55,9 @@ struct MealRequestListView: View {
             .font(.title2)
             .navigationTitle("Meal Requests")
             .navigationBarTitleDisplayMode(.inline)
+            .task {
+                try? await profileVM.loadCurrentUser()
+            }
             .onAppear {
                 let now = Date()
                 for mealRequest in mealRequests {

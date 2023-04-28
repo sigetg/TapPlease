@@ -8,8 +8,10 @@
 import Foundation
 import FirebaseFirestore
 
+@MainActor
 class ReviewViewModel: ObservableObject {
     @Published var review = Review()
+    @Published var reviews: [Review] = []
     
     func saveReview(menuItem: MenuItem, review: Review) async -> Bool {
         let db = Firestore.firestore() //ignore any error that shows up here. Wait for indexing. Clean build if it persists with Shift+Command+K.
@@ -57,5 +59,27 @@ class ReviewViewModel: ObservableObject {
             print("😡 ERROR: removing document \(error.localizedDescription)")
             return false
         }
+    }
+    
+    func getReviews(id: String) async {
+        let db = Firestore.firestore() //ignore any error that shows up here. Wait for indexing. Clean build if it persists with Shift+Command+K.
+        do {
+            let refArray = try await db.collection("menuItems").document(id).collection("reviews").getDocuments()
+            print("😎 reviews Found!")
+            do {
+                for document in refArray.documents {
+                    let data = try document.data(as: Review.self)
+                    reviews.append(data)
+                }
+                print("data successfully converted")
+                return
+            } catch {
+                print("😡 ERROR: Could not convert data to Review: \(error.localizedDescription)")
+            }
+        } catch {
+            print("😡 ERROR: Could not get data in 'reviews': \(error.localizedDescription)")
+            return
+        }
+        return
     }
 }

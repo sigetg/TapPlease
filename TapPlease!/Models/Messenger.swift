@@ -12,12 +12,14 @@ import FirebaseFirestoreSwift
 struct Messenger: Identifiable, Codable {
     @DocumentID var id: String?
     var reciever = ""
-    var sender = Auth.auth().currentUser?.email ?? ""
+    var recieverName = ""
+    var senderName = ""
+    var sender = Auth.auth().currentUser?.uid ?? ""
     var created = Date()
     var mealRequestID = ""
 
     var dictionary: [String: Any] {
-        return ["reciever": reciever, "sender": sender, "created": Timestamp(date: Date()), "mealRequestID": mealRequestID]
+        return ["reciever": reciever, "recieverName": recieverName, "senderName": senderName, "sender": sender, "created": Timestamp(date: Date()), "mealRequestID": mealRequestID]
     }
 }
 

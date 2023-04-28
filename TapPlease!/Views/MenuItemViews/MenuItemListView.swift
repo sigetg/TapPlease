@@ -11,6 +11,7 @@ import FirebaseFirestoreSwift
 
 struct MenuItemListView: View {
     @EnvironmentObject var menuItemVM: MenuItemViewModel
+    @EnvironmentObject var reviewsVM: ReviewViewModel
     @FirestoreQuery(collectionPath: "menuItems") var menuItems: [MenuItem]
     @Environment(\.dismiss) private var dismiss
     @State private var searchText = ""
@@ -42,8 +43,12 @@ struct MenuItemListView: View {
                 .navigationTitle("Popular Meals")
                 .navigationBarTitleDisplayMode(.inline)
                 .searchable(text: $searchText)
+                .onAppear {
+                    reviewsVM.reviews = []
+                    menuItemVM.photos = []
+                }
                 .toolbar {
-                    ToolbarItem(placement: .navigationBarLeading) {
+                    ToolbarItem(placement: .navigationBarTrailing) {
                         Button {
                             sheetIsPresented.toggle()
                         } label: {

@@ -14,6 +14,7 @@ import PhotosUI
 struct MealRequestDetailView: View {
     
     @EnvironmentObject var mealRequestVM: MealRequestViewModel
+    @EnvironmentObject var profileVM: ProfileViewModel
     @Environment (\.dismiss) private var dismiss
     @State var mealRequest: MealRequest
     @State private var postedByThisUser = false
@@ -21,46 +22,59 @@ struct MealRequestDetailView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
+            if !showingAsSheet {
+                Text("Posted By: \(mealRequest.postedByName)")
+                    .font(.title)
+                    .bold()
+                    .padding(.bottom)
+            }
             Text("Desired Meal:")
+                .font(.title)
                 .bold()
             TextField("enter what you want", text: $mealRequest.menuItem)
                 .textFieldStyle(.roundedBorder)
             
             Text("Delivery Location:")
+                .font(.title)
                 .bold()
             TextField("enter delivery location", text: $mealRequest.pickupLocation)
                 .textFieldStyle(.roundedBorder)
-            Text("Posted By: \(mealRequest.postedBy)")
             Text("Notes:")
+                .font(.title)
                 .bold()
             TextField("enter notes", text: $mealRequest.notes)
                 .textFieldStyle(.roundedBorder)
                 .frame(maxHeight: .infinity, alignment: .topLeading)
             Text("Expires at: \((mealRequest.postedOn + 3600).formatted(date: .omitted, time: .shortened))")
+                .font(.title)
+
         }
         .disabled(!postedByThisUser) //disable if review not posed by this user
-        .navigationBarBackButtonHidden(postedByThisUser)
         .navigationBarTitleDisplayMode(.inline)
-        .font(.title)
         .padding()
-        
+        .task {
+            try? await profileVM.loadCurrentUser()
+        }
         .onAppear {
             if  mealRequest.id == nil {
                 showingAsSheet = true
             }
-            if mealRequest.postedBy == Auth.auth().currentUser?.email {
+            if mealRequest.postedBy == Auth.auth().currentUser?.uid {
                 postedByThisUser = true
             }
         }
         .toolbar {
             if postedByThisUser { //new mealRequest, show Cancel / Save buttons
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") {
-                        dismiss()
+                if showingAsSheet {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button("Cancel") {
+                            dismiss()
+                        }
                     }
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Save") {
+                        mealRequest.postedByName = profileVM.user?.name ?? ""
                         Task {
                             let success = await mealRequestVM.saveMealRequest(mealRequest: mealRequest)
                             if success {

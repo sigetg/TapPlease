@@ -14,8 +14,9 @@ struct MenuItem: Identifiable, Codable {
     var description = ""
     var imageID = ""
     var name = ""
+    var postedBy = Auth.auth().currentUser?.uid ?? ""
 
     var dictionary: [String: Any] {
-        return ["description": description, "imageID": imageID, "name": name]
+        return ["description": description, "imageID": imageID, "name": name, "postedBy": postedBy]
     }
 }

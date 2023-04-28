@@ -11,6 +11,7 @@ import FirebaseFirestoreSwift
 
 struct MessengerListView: View {
     @EnvironmentObject var messengerVM: MessengerViewModel
+    @EnvironmentObject var mealRequestVM: MealRequestViewModel
     @FirestoreQuery(collectionPath: "messengers") var messengers: [Messenger]
     @Environment(\.dismiss) private var dismiss
     @State private var searchText = ""
@@ -18,7 +19,7 @@ struct MessengerListView: View {
     var myMessengers: [Messenger] {
     var tempMessengers: [Messenger] = []
         for messenger in messengers {
-            if messenger.reciever == Auth.auth().currentUser?.email || messenger.sender == Auth.auth().currentUser?.email {
+            if messenger.reciever == Auth.auth().currentUser?.uid || messenger.sender == Auth.auth().currentUser?.uid {
                 tempMessengers.append(messenger)
             }
         }
@@ -31,7 +32,7 @@ struct MessengerListView: View {
                 NavigationLink {
                     MessengerDetailView(messenger: messenger)
                 } label: {
-                    Text(messenger.reciever == Auth.auth().currentUser?.email ? messenger.sender : messenger.reciever)
+                    Text(messenger.reciever == Auth.auth().currentUser?.uid ? messenger.senderName : messenger.recieverName)
                 }
             }
             .listStyle(.plain)
@@ -39,11 +40,6 @@ struct MessengerListView: View {
             .navigationTitle("Active Request Chats")
             .navigationBarTitleDisplayMode(.inline)
             .searchable(text: $searchText)
-//            .toolbar {
-//                ToolbarItem(placement: .navigationBarLeading) {
-//                    
-//                }
-//            }
         }
     }
 }

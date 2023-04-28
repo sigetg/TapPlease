@@ -14,15 +14,15 @@ struct MessageBubble: View {
     @State var messenger: Messenger
     
     var body: some View {
-        VStack(alignment: message.sender != Auth.auth().currentUser?.email ? .leading : .trailing) {
+        VStack(alignment: message.sender != Auth.auth().currentUser?.uid ? .leading : .trailing) {
             HStack {
                 Text(message.text)
                     .padding()
-                    .background(message.sender != Auth.auth().currentUser?.email ? Color("Gray") : Color("AccentColor"))
-                    .foregroundColor(message.sender != Auth.auth().currentUser?.email ? .black : .white)
+                    .background(message.sender != Auth.auth().currentUser?.uid ? Color("Gray") : Color("AccentColor"))
+                    .foregroundColor(message.sender != Auth.auth().currentUser?.uid ? .black : .white)
                     .cornerRadius(30)
             }
-            .frame(maxWidth: 300, alignment: message.sender != Auth.auth().currentUser?.email ? .leading : .trailing)
+            .frame(maxWidth: 300, alignment: message.sender != Auth.auth().currentUser?.uid ? .leading : .trailing)
             .onTapGesture {
                 showTime.toggle()
             }
@@ -31,11 +31,11 @@ struct MessageBubble: View {
                 Text("\(message.timestamp.formatted(.dateTime.hour().minute()))")
                     .font(.caption2)
                     .foregroundColor(.gray)
-                    .padding(message.sender != Auth.auth().currentUser?.email ? .leading : .trailing, 25)
+                    .padding(message.sender != Auth.auth().currentUser?.uid ? .leading : .trailing, 25)
             }
         }
-        .frame(maxWidth: .infinity, alignment: message.sender != Auth.auth().currentUser?.email ? .leading : .trailing)
-        .padding(message.sender != Auth.auth().currentUser?.email ? .leading : .trailing)
+        .frame(maxWidth: .infinity, alignment: message.sender != Auth.auth().currentUser?.uid ? .leading : .trailing)
+        .padding(message.sender != Auth.auth().currentUser?.uid ? .leading : .trailing)
         .padding(.horizontal, 10)
     }
 }

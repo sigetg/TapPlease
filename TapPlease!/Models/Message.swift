@@ -13,7 +13,7 @@ struct Message: Identifiable, Codable, Equatable {
     @DocumentID var id: String?
     var text = ""
     var timestamp = Date()
-    var sender = Auth.auth().currentUser?.email ?? ""
+    var sender = Auth.auth().currentUser?.uid ?? ""
     
     var dictionary: [String: Any] {
         return ["text": text, "timestamp": Timestamp(date: Date()), "sender": sender]

@@ -26,6 +26,20 @@ struct RootView: View {
                 AuthenticationView(showSignInView: $showSignInView)
             }
         }
+        //SEND REQUEST TO RECIEVE NOTIFICATIONS
+//        .onAppear {
+//            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
+//                if granted {
+//                    UIApplication.shared.registerForRemoteNotifications()
+//                }
+//            }
+//
+//            NotificationCenter.default.addObserver(forName: Notification.Name("didRegisterForRemoteNotificationsWithDeviceToken"), object: nil, queue: .main) { notification in
+//                if let deviceToken = notification.object as? String {
+//                    UserDefaults.standard.set(deviceToken, forKey: "deviceToken")
+//                }
+//            }
+//        }
     }
 }
 

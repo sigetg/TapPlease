@@ -32,7 +32,14 @@ struct AuthenticationView: View {
     
     var body: some View {
         VStack {
+            Spacer()
+            Image("BCappIcon")
+                .resizable()
+                .frame(width: 300, height: 300)
+                .scaledToFit()
+                .padding()
             
+            Spacer()
             NavigationLink {
                 SignInEmailView(showSignInView: $showSignInView)
             } label: {
@@ -41,11 +48,11 @@ struct AuthenticationView: View {
                     .foregroundColor(.white)
                     .frame(height: 55)
                     .frame(maxWidth: .infinity)
-                    .background(Color.blue)
+                    .background(Color("AccentColor"))
                     .cornerRadius(10)
             }
             
-            GoogleSignInButton(viewModel: GoogleSignInButtonViewModel(scheme: .dark, style: .wide, state: .normal)) {
+            Button {
                 Task {
                     do {
                         try await viewModel.signInGoogle()
@@ -54,12 +61,26 @@ struct AuthenticationView: View {
                         print(error)
                     }
                 }
+            } label: {
+                HStack {
+                    Image("google")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 40)
+                        .padding(.trailing)
+                    Text("Sign In With Google")
+                }
+                .font(.headline)
+                .foregroundColor(.white)
+                .frame(height: 55)
+                .frame(maxWidth: .infinity)
+                .background(Color("AccentColor"))
+                .cornerRadius(10)
             }
             
             Spacer()
         }
         .padding()
-        .navigationTitle("Sign In")
     }
 }
 

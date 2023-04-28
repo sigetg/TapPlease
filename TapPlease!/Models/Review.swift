@@ -9,7 +9,7 @@ import Foundation
 import Firebase
 import FirebaseFirestoreSwift
 
-struct Review: Identifiable, Codable {
+struct Review: Identifiable, Codable, Equatable {
     @DocumentID var id: String?
     var title = ""
     var body = ""

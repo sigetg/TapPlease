@@ -14,11 +14,12 @@ struct MealRequest: Identifiable, Codable {
     var menuItem = ""
     var pickupLocation = ""
     var notes = ""
-    var postedBy = Auth.auth().currentUser?.email ?? ""
+    var postedBy = Auth.auth().currentUser?.uid ?? ""
+    var postedByName = ""
     var postedOn = Date()
     var accepted = false
 
     var dictionary: [String: Any] {
-        return ["menuItem": menuItem, "pickupLocation": pickupLocation, "notes": notes, "postedBy": postedBy, "postedOn": Timestamp(date: Date()), "accepted": accepted]
+        return ["menuItem": menuItem, "pickupLocation": pickupLocation, "notes": notes, "postedBy": postedBy, "postedByName": postedByName, "postedOn": Timestamp(date: Date()), "accepted": accepted]
     }
 }

@@ -11,6 +11,7 @@ import PhotosUI
 struct ProfileView: View {
     
     @EnvironmentObject var profileVM: ProfileViewModel
+//    @StateObject var manager = NotificationManager()
     @Binding var showSignInView: Bool
     @State private var selectedItem: PhotosPickerItem? = nil
     @State private var url: URL? = nil

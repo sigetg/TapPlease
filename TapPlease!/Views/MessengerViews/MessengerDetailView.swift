@@ -10,8 +10,8 @@ import Firebase
 import FirebaseFirestoreSwift
 
 struct MessengerDetailView: View {
-    @EnvironmentObject var profileVM: ProfileViewModel
     @EnvironmentObject var messageVM: MessageViewModel
+    @EnvironmentObject var messengerVM: MessengerViewModel
     @State var messenger: Messenger
     @State private var isFirstChange = true
     
@@ -39,6 +39,15 @@ struct MessengerDetailView: View {
                 }
             }
             .background(.white)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Food Delivered!") {
+                        Task {
+                            await messengerVM.deleteMessenger(messenger: messenger)
+                        }
+                    }
+                }
+            }
             .onAppear {
                 messageVM.getMessages(messenger: messenger, messages: messageVM.messages)
             }

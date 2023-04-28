@@ -11,26 +11,23 @@ import FirebaseFirestoreSwift
 
 struct TitleRow: View {
     @EnvironmentObject var messengerVM: MessengerViewModel
-    @EnvironmentObject var profileVM: ProfileViewModel
+    @EnvironmentObject var mealRequestVM: MealRequestViewModel
     @State var messenger: Messenger
     @State var mealRequest = MealRequest()
     
     var body: some View {
         HStack(spacing: 20) {
-            if let urlString = profileVM.user?.photoUrl, let url = URL(string: urlString) {
-                
-                AsyncImage(url: url) { image in
-                    image.resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 50, height: 50)
-                        .cornerRadius(50)
-                } placeholder: {
-                    ProgressView()
-                        .frame(width: 50, height: 50)
-                }
-            }
+//            AsyncImage(url: url) { image in
+//                image.resizable()
+//                    .aspectRatio(contentMode: .fill)
+//                    .frame(width: 50, height: 50)
+//                    .cornerRadius(50)
+//            } placeholder: {
+//                ProgressView()
+//                    .frame(width: 50, height: 50)
+//            }
             VStack(alignment: .leading) {
-                Text(messenger.reciever == Auth.auth().currentUser?.email ? messenger.sender : messenger.reciever)
+                Text(messenger.reciever == Auth.auth().currentUser?.uid ? messenger.senderName : messenger.recieverName)
                     .lineLimit(1)
                     .minimumScaleFactor(0.5)
                     .bold()
@@ -59,11 +56,10 @@ struct TitleRow: View {
         }
         .padding()
         .task {
-            try? await profileVM.loadCurrentUser()
-            if await messengerVM.getMealRequest(messenger: messenger) == nil {
+            if await mealRequestVM.getMealRequest(id: messenger.mealRequestID) == nil {
                 print("could not get mealRequest. returned nil")
             } else {
-                mealRequest = await messengerVM.getMealRequest(messenger: messenger)!
+                mealRequest = await mealRequestVM.getMealRequest(id: messenger.mealRequestID)!
             }
         }
     }
