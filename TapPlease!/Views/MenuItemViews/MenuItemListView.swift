@@ -17,9 +17,7 @@ struct MenuItemListView: View {
     @State private var searchText = ""
     @State private var showWebView = false
     @State private var sheetIsPresented = false
-    @State private var uiImage = UIImage()
-//    @State private var photo = Photo()
-    
+
     var searchResult: [MenuItem] { //TODO: Sort this by avg rating and add photo functionality
         if searchText.isEmpty {
             return menuItems
@@ -45,7 +43,6 @@ struct MenuItemListView: View {
                 .searchable(text: $searchText)
                 .onAppear {
                     reviewsVM.reviews = []
-                    menuItemVM.photos = []
                 }
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {

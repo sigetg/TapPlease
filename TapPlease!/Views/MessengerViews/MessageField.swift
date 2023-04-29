@@ -34,6 +34,7 @@ struct MessageField: View {
                     .background(Color("AccentColor"))
                     .cornerRadius(50)
             }
+            .disabled(inputMessage == "")
         }
         .padding(.horizontal)
         .padding(.vertical, 10)

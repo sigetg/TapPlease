@@ -33,6 +33,14 @@ final class ProfileViewModel: ObservableObject {
         }
     }
     
+    func updateTapperLevel(newLevel: String?) async throws {
+        guard let user else { return }
+        Task {
+            try await UserManager.shared.updateTapperLevel(userId: user.userId, tapperLevel: newLevel)
+            self.user = try await UserManager.shared.getUser(userId: user.userId)
+        }
+    }
+    
     
     func saveProfileImage(item: PhotosPickerItem) {
         guard let user else { return }

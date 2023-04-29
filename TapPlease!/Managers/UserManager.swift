@@ -46,5 +46,13 @@ final class UserManager {
         try await userDocument(userId: userId).updateData(data)
     }
     
+    func updateTapperLevel(userId: String, tapperLevel: String?) async throws {
+        let data: [String:Any] = [
+            DBUser.CodingKeys.tapperLevel.rawValue : tapperLevel ?? ""
+        ]
+
+        try await userDocument(userId: userId).updateData(data)
+    }
+    
 }
 

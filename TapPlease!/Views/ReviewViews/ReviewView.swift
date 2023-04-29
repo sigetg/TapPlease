@@ -7,14 +7,20 @@
 
 import SwiftUI
 import Firebase
+import PhotosUI
+
 
 struct ReviewView: View {
     @EnvironmentObject var reviewVM: ReviewViewModel
+    @Environment(\.dismiss) var dismiss
     @State private var postedByThisUser = false
     @State var menuItem: MenuItem
     @State var review: Review
     @State private var rateOrReviewerString = "Click to Rate:" //otherwise will say poster email and date
-    @Environment(\.dismiss) private var dismiss
+    @State private var selectedImage: Image = Image(systemName: "photo")
+    @State private var selectedPhoto: PhotosPickerItem?
+    @State private var imageURL: URL? // will hold URL of FirebaseStorage image
+    
     var body: some View {
         VStack {
             VStack(alignment: .leading) {
@@ -35,7 +41,7 @@ struct ReviewView: View {
                 .minimumScaleFactor(0.5)
                 .lineLimit(1)
                 .padding(.horizontal)
-
+            
             StarsSelectionView(rating: $review.rating)
                 .disabled(!postedByThisUser) // disable if not posted by this user
             
@@ -58,7 +64,58 @@ struct ReviewView: View {
             .font(.title2)
             
             
+            HStack {
+                Text("Image:")
+                    .bold()
+                    .font(.title2)
+                Spacer()
+                
+                PhotosPicker(selection: $selectedPhoto, matching: .images, preferredItemEncoding: .automatic) {
+                    Label("", systemImage: "photo.fill.on.rectangle.fill")
+                }
+                .onChange(of: selectedPhoto) { newValue in
+                    Task {
+                        do {
+                            if let data = try await newValue?.loadTransferable(type: Data.self) {
+                                if let uiImage = UIImage(data: data) {
+                                    selectedImage = Image(uiImage: uiImage)                    }
+                            }
+                        } catch {
+                            print("😡 ERROR: loading failed \(error.localizedDescription)")
+                        }
+                    }
+                }
+            }
+            .padding(.horizontal)
+            
+            if imageURL != nil {
+                AsyncImage(url: imageURL) { image in
+                    image
+                        .resizable()
+                        .scaledToFit()
+                        .cornerRadius(10)
+                        .shadow(radius: 10)
+                        .frame(minWidth: 300, alignment: .center)
+                } placeholder: {
+                    Image(systemName: "photo")
+                        .resizable()
+                        .scaledToFit()
+                }
+                .frame(maxWidth: .infinity)
+            } else {
+                selectedImage
+                    .resizable()
+                    .scaledToFit()
+                    .frame(maxWidth: .infinity)
+            }
             Spacer()
+        }
+        .task { // add to VStack - acts like .onAppear
+            if let id = review.id { // if this isn't a new place id
+                if let url = await reviewVM.getImageURL(id: id) { // It should have a url for the image (it may be "")
+                    imageURL = url
+                }
+            }
         }
         .onAppear {
             if review.reviewer == Auth.auth().currentUser?.email {
@@ -80,8 +137,11 @@ struct ReviewView: View {
                     Button("Save") {
                         Task {
                             let success = await reviewVM.saveReview(menuItem: menuItem, review: review)
+                            await reviewVM.saveImage(id: review.id ?? "", image: ImageRenderer(content: selectedImage).uiImage ?? UIImage() )
+                            reviewVM.reviews = []
                             await reviewVM.getReviews(id: menuItem.id ?? "")
                             if success {
+                                //                                await reviewVM.getReviews(id: menuItem.id ?? "")
                                 dismiss()
                             }
                         }
@@ -109,6 +169,6 @@ struct ReviewView: View {
 
 struct ReviewView_Previews: PreviewProvider {
     static var previews: some View {
-        ReviewView(menuItem: MenuItem(name: "Chicken Tikka"), review: Review())
+        ReviewView(menuItem: MenuItem(), review: Review())
     }
 }

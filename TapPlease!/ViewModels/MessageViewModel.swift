@@ -73,7 +73,7 @@ class MessageViewModel: ObservableObject {
             let documentRef = try await db.collection(collectionString).addDocument(data: message.dictionary)
             self.message = message
             self.message.id = documentRef.documentID
-            if messenger.sender == Auth.auth().currentUser?.email {
+            if messenger.sender == Auth.auth().currentUser?.uid {
                 playSound(soundName: "sendSound")
             } else {
                 playSound(soundName: "recieveSound")

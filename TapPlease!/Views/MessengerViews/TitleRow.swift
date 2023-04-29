@@ -32,23 +32,31 @@ struct TitleRow: View {
                     .minimumScaleFactor(0.5)
                     .bold()
                     .font(.title)
-                HStack {
+                Rectangle()
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 1)
+                    .foregroundColor(.gray)
+                    .padding(.horizontal, 5)
+                HStack (alignment: .top) {
                     Text("Pickup Location:")
                         .bold()
                     Spacer()
                     Text(mealRequest.pickupLocation)
+                        .frame(maxWidth: 230)
                 }
-                HStack {
+                HStack (alignment: .top) {
                     Text("Desired Meal:")
                         .bold()
                     Spacer()
                     Text(mealRequest.menuItem)
+                        .frame(maxWidth: 230)
                 }
-                HStack {
+                HStack (alignment: .top) {
                     Text("Notes:")
                         .bold()
                     Spacer()
                     Text(mealRequest.notes)
+                        .frame(maxWidth: 230)
                 }
             }
             .font(.caption)

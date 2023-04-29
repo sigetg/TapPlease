@@ -12,6 +12,7 @@ import FirebaseFirestoreSwift
 struct MessengerDetailView: View {
     @EnvironmentObject var messageVM: MessageViewModel
     @EnvironmentObject var messengerVM: MessengerViewModel
+    @Environment(\.dismiss) var dismiss
     @State var messenger: Messenger
     @State private var isFirstChange = true
     
@@ -43,7 +44,10 @@ struct MessengerDetailView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Food Delivered!") {
                         Task {
-                            await messengerVM.deleteMessenger(messenger: messenger)
+                            let success = await messengerVM.deleteMessenger(messenger: messenger)
+                            if success {
+                                dismiss()
+                            }
                         }
                     }
                 }

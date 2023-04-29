@@ -23,6 +23,22 @@ struct ProfileView: View {
                     Text("Name: ")
                         .bold()
                     Text("\(user.name ?? "")")
+                    Spacer()
+                    Text("\(user.tapperLevel ?? "")")
+                    if user.tapperLevel == "1" {
+                        Image(systemName: "star")
+                    } else if user.tapperLevel == "2" {
+                        Image(systemName: "star.fill")
+                    } else if user.tapperLevel == "3" {
+                        Image(systemName: "star.fill")
+                            .foregroundColor(Color("BCMaroon"))
+                    } else if user.tapperLevel == "4" {
+                        Image(systemName: "star.fill")
+                            .foregroundColor(Color("BCGold"))
+                    } else {
+                        Image(systemName: "trophy.fill")
+                            .foregroundColor(Color("BCGold"))
+                    }
                 }
                 HStack {
                     Text("Email: ")

@@ -40,6 +40,12 @@ struct MealRequestListView: View {
                                         success = await messengerVM.saveMessenger(messenger: Messenger(reciever: newMealRequest.postedBy, recieverName: mealRequest.postedByName, senderName: profileVM.user?.name ?? "", mealRequestID: newMealRequest.id ?? ""))
                                         success = await mealRequestVM.saveMealRequest(mealRequest: newMealRequest)
                                         if success {
+                                            do {
+                                                try await profileVM.updateTapperLevel(newLevel: String(Int(profileVM.user?.tapperLevel ?? "1")! + 1))
+                                                print("LEVEL UP!")
+                                            } catch {
+                                                print(error)
+                                            }
                                             print("Meal Request Accepted")
                                         }
                                     }
@@ -86,6 +92,13 @@ struct MealRequestListView: View {
                         Image(systemName: "plus")
                     }
                 }
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        
+                    } label: {
+                        Image(systemName: "info.circle")
+                    }
+                }
             }
             
         }
@@ -96,6 +109,7 @@ struct MealRequestListView: View {
         }
     }
 }
+
 
 struct MealRequestListView_Previews: PreviewProvider {
     static var previews: some View {

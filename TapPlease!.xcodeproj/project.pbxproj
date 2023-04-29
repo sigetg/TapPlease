@@ -59,6 +59,7 @@
 		DABEEEE229FC1F42001B3215 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABEEEE129FC1F42001B3215 /* Utilities.swift */; };
 		DAED91A829FC7AF800215270 /* MenuItemDetailPhotoScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAED91A729FC7AF800215270 /* MenuItemDetailPhotoScrollView.swift */; };
 		DAED91AA29FC7B7C00215270 /* PhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAED91A929FC7B7C00215270 /* PhotoView.swift */; };
+		DAED91AE29FCD08F00215270 /* PopupHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAED91AD29FCD08F00215270 /* PopupHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -109,6 +110,7 @@
 		DABEEEE129FC1F42001B3215 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		DAED91A729FC7AF800215270 /* MenuItemDetailPhotoScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemDetailPhotoScrollView.swift; sourceTree = "<group>"; };
 		DAED91A929FC7B7C00215270 /* PhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
+		DAED91AD29FCD08F00215270 /* PopupHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +171,7 @@
 				DABEEEE129FC1F42001B3215 /* Utilities.swift */,
 				DABEEED929FB8D73001B3215 /* NotificationManager.swift */,
 				DA10F57029F98239006CEB41 /* SignInWithGoogle.swift */,
+				DAED91AD29FCD08F00215270 /* PopupHelper.swift */,
 				DA10F57229F9871A006CEB41 /* Utilities.swift */,
 			);
 			path = Managers;
@@ -397,6 +400,7 @@
 				DA5FEAAB29F0CA7500E13693 /* Photo.swift in Sources */,
 				DA5FEABB29F0CB2100E13693 /* ReviewRowView.swift in Sources */,
 				DA5FEAB929F0CAF900E13693 /* StarsSelectionView.swift in Sources */,
+				DAED91AE29FCD08F00215270 /* PopupHelper.swift in Sources */,
 				DA5FEAB529F0CAD500E13693 /* MenuItemDetailView.swift in Sources */,
 				DA5FEAC929F0DCD600E13693 /* MealRequestViewModel.swift in Sources */,
 				DA5FEAB129F0CAA100E13693 /* ReviewViewModel.swift in Sources */,

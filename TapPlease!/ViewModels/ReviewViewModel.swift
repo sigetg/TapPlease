@@ -7,11 +7,15 @@
 
 import Foundation
 import FirebaseFirestore
+import FirebaseStorage
 
 @MainActor
 class ReviewViewModel: ObservableObject {
     @Published var review = Review()
     @Published var reviews: [Review] = []
+    
+
+    
     
     func saveReview(menuItem: MenuItem, review: Review) async -> Bool {
         let db = Firestore.firestore() //ignore any error that shows up here. Wait for indexing. Clean build if it persists with Shift+Command+K.
@@ -81,5 +85,36 @@ class ReviewViewModel: ObservableObject {
             return
         }
         return
+    }
+    
+    func getImageURL(id: String) async -> URL? {
+        let storage = Storage.storage()
+        let storageRef = storage.reference().child("\(id)/image.jpg")
+
+        do {
+            let url = try await storageRef.downloadURL()
+            return url
+        } catch {
+            return nil
+        }
+    }
+
+    func saveImage(id: String, image: UIImage) async {
+        let storage = Storage.storage()
+        let storageRef = storage.reference().child("\(id)/image.jpg")
+
+        let resizedImage = image.jpegData(compressionQuality: 0.2)
+        let metadata = StorageMetadata()
+        metadata.contentType = "image/jpg"
+
+        if let resizedImage = resizedImage {
+            do {
+                let metadata = try await storageRef.putDataAsync(resizedImage)
+                print("Metadata: ", metadata)
+                print("📸 Image Saved!")
+            } catch {
+                print("😡 ERROR: uploading image to FirebaseStorage \(error.localizedDescription)")
+            }
+        }
     }
 }
