@@ -162,7 +162,7 @@
 			path = ReviewViews;
 			sourceTree = "<group>";
 		};
-		DA10F56629F8D3EC006CEB41 /* Managers */ = {
+		DA10F56629F8D3EC006CEB41 /* Managers & Helpers */ = {
 			isa = PBXGroup;
 			children = (
 				DA10F56429F8D3E7006CEB41 /* UserManager.swift */,
@@ -174,7 +174,7 @@
 				DAED91AD29FCD08F00215270 /* PopupHelper.swift */,
 				DA10F57229F9871A006CEB41 /* Utilities.swift */,
 			);
-			path = Managers;
+			path = "Managers & Helpers";
 			sourceTree = "<group>";
 		};
 		DA10F56D29F974D2006CEB41 /* AuthViews */ = {
@@ -229,7 +229,7 @@
 			children = (
 				DA5FEAC129F0D1C800E13693 /* TapPlease--Info.plist */,
 				DA5FEA8B29F0C7B400E13693 /* TapPlease_App.swift */,
-				DA10F56629F8D3EC006CEB41 /* Managers */,
+				DA10F56629F8D3EC006CEB41 /* Managers & Helpers */,
 				DA5FEAA529F0CA3100E13693 /* Models */,
 				DA5FEAA629F0CA3D00E13693 /* ViewModels */,
 				DA5FEAA729F0CA4F00E13693 /* Views */,

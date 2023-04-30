@@ -12,14 +12,16 @@ import FirebaseFirestoreSwift
 struct MessengerDetailView: View {
     @EnvironmentObject var messageVM: MessageViewModel
     @EnvironmentObject var messengerVM: MessengerViewModel
+    @EnvironmentObject var mealRequestVM: MealRequestViewModel
     @Environment(\.dismiss) var dismiss
     @State var messenger: Messenger
+    @State var mealRequest = MealRequest()
     @State private var isFirstChange = true
     
     var body: some View {
         VStack {
             VStack {
-                TitleRow(messenger: messenger)
+                TitleRow(messenger: messenger, mealRequest: mealRequest)
                     .background(Color("Gray"))
                 
                 ScrollViewReader { proxy in
@@ -31,7 +33,6 @@ struct MessengerDetailView: View {
                     .background(.white)
                     .cornerRadius(30, corners: [.topLeft, .topRight]) // Custom cornerRadius modifier added in Extensions file
                     .onChange(of: messageVM.lastMessageId) { id in
-                        print("👗 this is doing something")
                         // When the lastMessageId changes, scroll to the bottom of the conversation
                         withAnimation {
                             proxy.scrollTo(messageVM.messages[messageVM.messages.endIndex-1].id)
@@ -40,12 +41,20 @@ struct MessengerDetailView: View {
                 }
             }
             .background(.white)
+            .task {
+                if await mealRequestVM.getMealRequest(id: messenger.mealRequestID) == nil {
+                    print("could not get mealRequest. returned nil")
+                } else {
+                    mealRequest = await mealRequestVM.getMealRequest(id: messenger.mealRequestID)!
+                }
+            }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Food Delivered!") {
                         Task {
                             let success = await messengerVM.deleteMessenger(messenger: messenger)
-                            if success {
+                            let success2 = await mealRequestVM.deleteMealRequest(mealRequest: mealRequest)
+                            if success && success2 {
                                 dismiss()
                             }
                         }

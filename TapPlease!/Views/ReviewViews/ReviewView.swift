@@ -73,7 +73,9 @@ struct ReviewView: View {
                 PhotosPicker(selection: $selectedPhoto, matching: .images, preferredItemEncoding: .automatic) {
                     Label("", systemImage: "photo.fill.on.rectangle.fill")
                 }
+                .disabled(!postedByThisUser)
                 .onChange(of: selectedPhoto) { newValue in
+                    imageURL = nil
                     Task {
                         do {
                             if let data = try await newValue?.loadTransferable(type: Data.self) {
@@ -95,17 +97,22 @@ struct ReviewView: View {
                         .scaledToFit()
                         .cornerRadius(10)
                         .shadow(radius: 10)
-                        .frame(minWidth: 300, alignment: .center)
+                        .frame(maxWidth: .infinity)
                 } placeholder: {
                     Image(systemName: "photo")
                         .resizable()
                         .scaledToFit()
+                        .cornerRadius(10)
+                        .shadow(radius: 10)
+                        .frame(maxWidth: .infinity)
                 }
                 .frame(maxWidth: .infinity)
             } else {
                 selectedImage
                     .resizable()
                     .scaledToFit()
+                    .cornerRadius(10)
+                    .shadow(radius: 10)
                     .frame(maxWidth: .infinity)
             }
             Spacer()
@@ -136,13 +143,16 @@ struct ReviewView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Save") {
                         Task {
-                            let success = await reviewVM.saveReview(menuItem: menuItem, review: review)
-                            await reviewVM.saveImage(id: review.id ?? "", image: ImageRenderer(content: selectedImage).uiImage ?? UIImage() )
+                            let id = await reviewVM.saveReview(menuItem: menuItem, review: review)
                             reviewVM.reviews = []
                             await reviewVM.getReviews(id: menuItem.id ?? "")
-                            if success {
-                                //                                await reviewVM.getReviews(id: menuItem.id ?? "")
+                            if id != nil {
+                                if imageURL == nil {
+                                    await reviewVM.saveImage(id: id ?? "", image: ImageRenderer(content: selectedImage).uiImage ?? UIImage() )
+                                }
                                 dismiss()
+                            } else {
+                                print(" Error saving image")
                             }
                         }
                     }

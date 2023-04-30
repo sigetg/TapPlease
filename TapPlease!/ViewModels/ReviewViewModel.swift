@@ -17,12 +17,12 @@ class ReviewViewModel: ObservableObject {
 
     
     
-    func saveReview(menuItem: MenuItem, review: Review) async -> Bool {
+    func saveReview(menuItem: MenuItem, review: Review) async -> String? {
         let db = Firestore.firestore() //ignore any error that shows up here. Wait for indexing. Clean build if it persists with Shift+Command+K.
         
         guard let menuItemID = menuItem.id else {
             print("😡 ERROR: menuItem.id = nil")
-            return false
+            return nil
         }
         
         let collectionString = "menuItems/\(menuItemID)/reviews"
@@ -31,20 +31,20 @@ class ReviewViewModel: ObservableObject {
             do {
                 try await db.collection(collectionString).document(id).setData(review.dictionary)
                 print("😎 Data updated successfully!")
-                return true
+                return id
             } catch {
                 print("😡 ERROR: Could not update data in 'reviews' \(error.localizedDescription)")
-                return false
+                return nil
             }
         } else { //no id? then this must be a new review to add.
             do {
-                _ = try await db.collection(collectionString).addDocument(data: review.dictionary)
+                let documentRef = try await db.collection(collectionString).addDocument(data: review.dictionary)
+                let id = documentRef.documentID
                 print("🐣 Data created successfully!")
-                return true
+                return id
             } catch {
                 print("😡 ERROR: Could not create a new review in 'reviews' \(error.localizedDescription)")
-                return false
-
+                return nil
             }
         }
     }

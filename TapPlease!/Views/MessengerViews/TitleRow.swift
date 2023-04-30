@@ -13,7 +13,7 @@ struct TitleRow: View {
     @EnvironmentObject var messengerVM: MessengerViewModel
     @EnvironmentObject var mealRequestVM: MealRequestViewModel
     @State var messenger: Messenger
-    @State var mealRequest = MealRequest()
+    @State var mealRequest: MealRequest
     
     var body: some View {
         HStack(spacing: 20) {
@@ -75,7 +75,7 @@ struct TitleRow: View {
 
 struct TitleRow_Previews: PreviewProvider {
     static var previews: some View {
-        TitleRow(messenger: Messenger())
+        TitleRow(messenger: Messenger(), mealRequest: MealRequest())
             .background(Color("Peach"))
     }
 }
